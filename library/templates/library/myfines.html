@@ -1,0 +1,52 @@
+<style>
+  .footer {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+    
+  
+</style>
+{% extends 'core/base.html' %} {%block heading %} <h1 class="font-bold text-3xl text-center pb-5 shadow-md">My Fines</h2> {% endblock heading %}
+{%block content %}
+
+<ul class="list-disc px-4">
+  {% for fine in fines %}
+  <li>
+    <div class="flex flex-col sm:flex-row content-center">
+      <h2 class="mt-0 sm:mt-2 text-2xl">
+        Fine of <span class="text-black text-pink-500 ">${{ fine.amount }}</span> for Book: {{ fine.issue.book.name }}
+      </h2>
+      {% if not fine.paid %}
+      <a class="text-white hover:text-red-500 text-md rounded text-center bg-purple-600 px-4 py-2 mt-2 sm:mt-0 ml-0 sm:ml-2" href="https://www.bkash.com/en">Pay</a>
+      <h2 class="my-2 p-2 text-2xl">Or Pay with Cash to Librarian In-Person</h2>
+      {% endif %}
+    </div> 
+  </li>
+  {% empty %}
+  <li class = "list-none">
+    <p class = "text-xl">Nothing available here</p>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}
+
+{% block footer %}
+<div class = 'footer'>
+    <footer class="footer bg-blue-900 text-white relative border-b-2 mt-10">
+      <div class="container mx-auto px-6">
+          <div class="mt-5 flex flex-col items-center">
+              <div class="sm:w-2/3 text-center py-0 pb-2">
+                  <p class="text-md text-white font-bold mb-2">
+                      © Copyright {% now "Y" %} All right reserved
+                  </p>
+              </div>
+          </div>
+      </div>
+    </footer> 
+  </div>
+{% endblock %}

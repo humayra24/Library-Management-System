@@ -1,0 +1,100 @@
+
+<style>
+  .footer {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+  
+</style>
+{% extends 'core/base.html' %}
+{% block heading %} <h1 class="font-bold text-3xl text-center pb-5 shadow-md">Registration</h1> {% endblock heading %}
+
+{% block content %}
+
+<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="/student/signup/" method="POST">
+  {% csrf_token %}
+  <div class="w-full md:w-1/2 px-3"></div>
+    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-xl" for="firstname">Firstname</label>
+    <input
+      class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      name="firstname"
+      type="text"
+      placeholder="Enter Your Firstname"
+    />
+  </div>
+  <div class="w-1/2 max-w-xs flex flex-col sm:flex-row mt-4 sm:items-center"></div>
+    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-xl" for="lastname">Lastname</label>
+    <input
+      class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      name="lastname"
+      type="text"
+      placeholder="Enter Your Lastname"
+    />
+  </div>
+  <div class="w-1/2  max-w-xs flex flex-col sm:flex-row mt-4  sm:items-center"></div>
+  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-xl" for="studentID">StudentID</label>
+  
+  <input
+    class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    name="studentID"
+    type="text"
+    id="studentID"
+    placeholder="Enter Your StudentID"
+  />
+  <p id="studentID-error" class="hidden text-red-400 py-1">ID either incomplete or exists</p>
+</div>
+</div>
+<div class="w-1/2 max-w-xs flex flex-col sm:flex-row mt-4 sm:items-center"></div>
+  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-xl" for="password">Password</label>
+  <input
+    class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    name="password"
+    type="password"
+    placeholder="Enter a strong Password"
+  />
+</div> <br>
+<button class="text-white hover:shadow-md text-xl rounded bg-green-500 px-4 py-2 mt-8 " type="submit">Submit</button>
+</form>
+
+<script>
+const idField=document.querySelector('#studentID');
+const idError=document.querySelector('#studentID-error');
+idField.addEventListener('input',()=>{
+  idError.classList.add('hidden')
+})
+
+function validateForm() {
+  var firstname = document.querySelector("[name='firstname']").value;
+  var lastname = document.querySelector("[name='lastname']").value;
+  var studentID = document.querySelector("[name='studentID']").value;
+  var password = document.querySelector("[name='password']").value;
+
+  if (firstname === "" || lastname === "" || studentID === "" || password === "") {
+    alert("Please fill in all required fields.");
+    return false; 
+  }
+
+  return true; 
+}
+</script>
+{% endblock content %}
+
+{% block footer %}
+<div class = 'footer'>
+    <footer class="footer bg-blue-900 text-white relative border-b-2 mt-10">
+      <div class="container mx-auto px-6">
+          <div class="mt-5 flex flex-col items-center">
+              <div class="sm:w-2/3 text-center py-0 pb-2">
+                  <p class="text-md text-white font-bold mb-2">
+                      © Copyright {% now "Y" %} All right reserved
+                  </p>
+              </div>
+          </div>
+      </div>
+    </footer> 
+  </div>
+{% endblock %}

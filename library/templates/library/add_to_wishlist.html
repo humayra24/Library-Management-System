@@ -1,0 +1,63 @@
+<style>
+    .footer {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+    
+  </style>
+
+{% extends 'core/base.html' %}
+{% block heading %} <h1 class="font-bold text-3xl text-center pb-5 shadow-md">Add To Wishlist</h2> {% endblock heading %}
+
+{% block content %}
+
+{% comment %} <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add to Wishlist</button>
+</form> {% endcomment %}
+
+<div class="max-w-md mx-auto mt-5">
+    <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-blue-900 text-2xl">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+  
+      <div class="mb-4">
+        {{ form.book.label_tag }}
+        {{ form.book }}
+        {% if form.book.errors %}
+        <p class="text-red-500 text-xs italic">{{ form.book.errors }}</p>
+        {% endif %}
+      </div>
+  
+      <div class="flex items-center justify-between">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Add To Wishlist
+        </button>
+      </div>
+    </form>
+  </div>
+
+  
+{% endblock %}
+
+{% block footer %}
+<div class = 'footer'>
+    <footer class="footer bg-blue-900 text-white relative border-b-2 mt-10">
+      <div class="container mx-auto px-6">
+          <div class="mt-5 flex flex-col items-center">
+              <div class="sm:w-2/3 text-center py-0 pb-2">
+                  <p class="text-md text-white font-bold mb-2">
+                      © Copyright {% now "Y" %} All right reserved
+                  </p>
+              </div>
+          </div>
+      </div>
+    </footer> 
+  </div>
+{% endblock %}
+

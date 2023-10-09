@@ -1,0 +1,90 @@
+<style>
+  a {
+    font-size: 23px;
+    margin-right: 26px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  nav {
+    background-color:  #f0f0f0;    /* Background color for the navbar */
+    color: #fff; /* Text color for navbar links */
+    padding: 10px 0; /* Add some padding for better spacing */
+  }
+  .header {
+	background: #fff;
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 1020;
+	box-shadow: 0 2px 25px -13px rgba(0,0,0,.8);
+}
+</style>
+
+<nav class="flex items-center justify-between flex-wrap  p-6 px-10">
+  <div class="flex items-center flex-shrink-0 text-white mr-6">
+    <a class="font-bold text-blue-900 text-xl sm:text-3xl " href="/"
+      >Bookish</a
+    >
+    <button id="ham" class="w-8 sm:hidden">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <ul
+    id="menu"
+    class="w-full pr-2 lg:pr-4 xl:pr-0 lg:w-2/3 justify-end items-end sm:items-center flex flex-col sm:flex-row space-x-4"
+  >
+    {% if user.is_anonymous %}
+    <li><a class="hover:underline text-blue-900" href="/student/login">Login</a></li>
+    <li><a class="hover:underline text-blue-900" href="/student/signup">Register</a></li>
+    <li><a class="hover:underline text-blue-900" href="/admin/">Admin Dashboard</a></li>
+    {% elif user.is_superuser %}
+    <li><a class="hover:underline text-blue-900" href="/all-issues/"> Book Requests</a></li>
+    <li><a class="hover:underline text-blue-900" href="/admin/">Admin DashBoard</a></li>
+    <li><a class="hover:underline text-blue-900" href="/student/logout">Logout</a></li>
+    {% else %}
+    <li><a class="hover:underline text-blue-900" href="/my-issues/">Book History</a></li>
+    <li><a class="hover:underline text-blue-900" href="/my-fines/">Book Fines</a></li>
+    <li><a class="hover:underline text-blue-900" href="/add-to-wishlist/">Wishlist</a></li> 
+    <li><a class="hover:underline text-blue-900" href="/wishlist/">View Wishlit</a></li>
+    <li><a class="hover:underline text-blue-900" href="/student/logout">Logout</a></li>
+    {% endif %}
+  </ul>
+  
+</nav>
+
+<script>
+  const ham = document.querySelector("#ham");
+  const menu = document.querySelector("#menu");
+  ham.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+
+  window.addEventListener("load", () => {
+    if (window.matchMedia("(min-width: 640px)").matches) {
+      menu.classList.remove("hidden");
+    } else {
+      menu.classList.add("hidden");
+    }
+  });
+  window.addEventListener("resize", () => {
+    if (window.matchMedia("(min-width: 640px)").matches) {
+      menu.classList.remove("hidden");
+    } else {
+      menu.classList.add("hidden");
+    }
+  });
+</script>

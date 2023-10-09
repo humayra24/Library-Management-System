@@ -1,0 +1,53 @@
+<style>
+    .footer {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+    
+  </style>
+
+
+
+{% extends 'core/base.html' %}
+
+{% block heading %}<h1 class="font-bold text-3xl text-center pb-5 shadow-md">My WishList</h2> {% endblock heading %}
+
+{% block content %}
+
+<div class="max-w-md mx-auto mt-5">
+  {% if wishlist_items %}
+  
+    <ul>
+      {% for item in wishlist_items %}
+        <li class = "text-xl">
+          {{ item.book.name }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Your wishlist is empty.</p>
+  {% endif %}
+  <br>
+  <button type="submit" class="bg-green-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"><a href="{% url 'add_to_wishlist' %}">Add Book to Wishlist</a> </button>
+
+</div>
+{% endblock %}
+{% block footer %}
+<div class = 'footer'>
+    <footer class="footer bg-blue-900 text-white relative border-b-2 mt-10">
+      <div class="container mx-auto px-6">
+          <div class="mt-5 flex flex-col items-center">
+              <div class="sm:w-2/3 text-center py-0 pb-2">
+                  <p class="text-md text-white font-bold mb-2">
+                      © Copyright {% now "Y" %} All right reserved
+                  </p>
+              </div>
+          </div>
+      </div>
+    </footer> 
+  </div>
+{% endblock %}
